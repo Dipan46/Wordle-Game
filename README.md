@@ -1,7 +1,7 @@
 # 🔠 Word Guess Game
 
 **"Word Guess Game"** is a fast, keyboard-driven React mini-game inspired by Wordle.  
-Guess a random 5-letter word in just 6 tries! Tiles change color to show how close your guess is — simple, addictive, and fun.
+Guess a random word in just a handful of tries! Choose the word length, type your guesses, and use the tile colors to narrow it down — simple, addictive, and fun.
 
 ---
 
@@ -13,35 +13,51 @@ Guess a random 5-letter word in just 6 tries! Tiles change color to show how clo
 
 ## ✨ Features
 
-- 🎯 **Random Word Generation** – Fetches a random 5-letter English word from the Random Word API.
+- 🎯 **Random Word Generation**  
+  Fetches a random English word from the Random Word API based on your chosen length.
+
+- 📏 **Custom Word Length**  
+  Use the number input to choose how long the target word should be (e.g. 3–10 letters).  
+  The app:
+  - Updates the solution word to match the new length
+  - Resets guesses and game state accordingly
+
 - ⌨️ **Keyboard Controls** – Type directly using your keyboard:
   - Letter keys to build your guess
   - `Backspace` to delete the last letter
-  - `Enter` to submit your guess
-- 🧩 **6 Attempts** – You get six rows to crack the word.
+  - `Enter` to submit the guess (only when the guess length matches the word length)
+
+- 🧩 **Limited Attempts**  
+  You get **wordLength + 1** rows to crack the word (e.g. 6 attempts for 5-letter words).
+
 - 🟩 **Visual Feedback** – Tile colors indicate how close your guess is:
   - **Green** – Correct letter in the correct position
   - **Yellow** – Letter exists but in a different position
   - **Gray** – Letter is not in the word
-- 🚫 **Game Over State** – Once you guess correctly, the game stops accepting input.
-- 🧱 **Simple Component Structure** – Easy-to-understand code, great for beginners.
-- 🌐 **API Integration** – Uses an external API for dynamic word generation.
 
----
+- 🚫 **Game Over State**  
+  Once you guess the word correctly, the game stops accepting input.
+
+- 🧱 **Simple Component Structure**  
+  Easy-to-understand code, great for beginners learning React & game logic.
+
+- 🌐 **API Integration**  
+  Uses an external API for dynamic word generation:  
+  ```text
+  https://random-word-api.herokuapp.com/word?length={wordLength}
 
 ## 🛠️ Technologies Used
 
-- **React** – UI rendering and state management
-- **JavaScript (ES6+)** – Game logic and event handling
-- **HTML & CSS** – Layout and styling
-- **Random Word API** – Word data source  
-  `https://random-word-api.herokuapp.com/word?length=5`
+* **React** – UI rendering and state management
+* **JavaScript (ES6+)** – Game logic and event handling
+* **HTML & CSS** – Layout and styling
+* **Random Word API** – Word data source
 
 ---
 
 ## 📸 Preview
 
-_Example UI of the app in action:_
+*Example UI of the app in action:*
 
 ![Preview](./preview/word-guess.png)
 
@@ -51,7 +67,7 @@ _Example UI of the app in action:_
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (which includes `npm`)
+* [Node.js](https://nodejs.org/) (which includes `npm`)
 
 ### Installation
 
@@ -60,6 +76,7 @@ _Example UI of the app in action:_
    ```bash
    git clone https://github.com/Dipan46/word-guess-game.git
    cd word-guess-game
+   ```
 
 2. **Install dependencies**:
 
@@ -93,39 +110,48 @@ _Example UI of the app in action:_
 
 ```text
 src/
-├── App.css        # Main styles for tiles, layout, and game board
-├── App.jsx        # Core game logic & UI (Word Guess Game)
-└── main.jsx / index.js   # React entry point
+├── App.css             # Main styles for tiles, layout, and game board
+├── App.jsx             # Core game logic & UI (Word Guess Game)
+└── main.jsx / index.js # React entry point
 ```
 
-> The `Line` component is defined inside `App.jsx` and is responsible for rendering each guess row and its colored tiles.
+> The `Line` component is defined inside `App.jsx` and is responsible for rendering each guess row and its colored tiles based on the current `wordLength`.
 
 ---
 
 ## 🧠 Game Logic & Concepts Demonstrated
 
-* 🧠 **State Management** with `useState`
+* 🧠 **State Management** with `useState`:
 
-  * `solution` – the current target word
+  * `wordLength` – current length of the target word (configurable via input)
+  * `solution` – the current target word fetched from the API
   * `currentGuess` – the guess the user is typing
-  * `guesses` – array of submitted guesses
+  * `guesses` – array of submitted guesses (size: `wordLength + 1`)
   * `isGameOver` – stops input when the user wins
-* 🌐 **Side Effects** with `useEffect`
 
-  * Fetching the random word from the API on initial render
+* 🌐 **Side Effects** with `useEffect`:
+
+  * Fetching a random word **whenever `wordLength` changes**
   * Setting up and cleaning up a `keydown` event listener on `window`
+
 * 🧮 **Derived State**:
 
-  * Detecting which guess row is currently active
+  * Detecting which guess row is currently active by finding the first `null` in `guesses`
+
 * 🧩 **Conditional Rendering & Styling**:
 
   * Applying `.correct`, `.close`, and `.incorrect` classes based on comparison with `solution`
+  * Rendering different numbers of tiles per row based on `wordLength`
+
 * ⌨️ **Keyboard Event Handling**:
 
   * Handling `Enter`, `Backspace`, and letter keys
+  * Preventing submission unless `currentGuess.length === wordLength`
+  * Ignoring input once `isGameOver` is `true`
+
 * 🧱 **Component Composition**:
 
-  * Splitting UI into `Line` and `Tile`-like logic for each row (inside `Line`)
+  * Splitting UI into a top-level `App` component and a `Line` component used to render each guess row
 
 ---
 
@@ -138,6 +164,7 @@ src/
 * 💾 **Local Storage** – Store game stats like total games played, wins, and streaks.
 * 📱 **Responsive Design Enhancements** – Improve UX on mobile devices.
 * 🎨 **Animations** – Add flip / bounce animations on tile reveal.
+* 🧪 **Difficulty Presets** – Quick buttons like “Easy (4 letters)”, “Medium (5 letters)”, “Hard (8+ letters)”.
 
 ---
 
@@ -162,4 +189,3 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 👨‍💻 Author
 
 Made with ❤️ by [Dipan46](https://github.com/Dipan46)
-
