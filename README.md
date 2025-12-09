@@ -7,7 +7,7 @@ Guess a random word in just a handful of tries! Choose the word length, type you
 
 ## 🔍 Preview
 
-- Live – 
+- Live – https://dipan46.github.io/Wordle-Game/
 
 ---
 
