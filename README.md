@@ -61,8 +61,6 @@ _Example UI of the app in action:_
    git clone https://github.com/Dipan46/word-guess-game.git
    cd word-guess-game
 
-   ````markdown
-
 2. **Install dependencies**:
 
    ```bash
