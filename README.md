@@ -163,6 +163,3 @@ This project is open source and available under the [MIT License](LICENSE).
 
 Made with ❤️ by [Dipan46](https://github.com/Dipan46)
 
-```
-```
-
