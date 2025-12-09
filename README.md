@@ -43,8 +43,7 @@ Guess a random 5-letter word in just 6 tries! Tiles change color to show how clo
 
 _Example UI of the app in action:_
 
-![Preview](./preview/word-guess.png)  
-> _(Add a screenshot named `word-guess.png` inside a `preview` folder in your project)_
+![Preview](./preview/word-guess.png)
 
 ---
 
