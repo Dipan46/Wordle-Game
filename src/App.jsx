@@ -8,7 +8,7 @@ export default function App() {
     const [solution, setSolution] = useState("");
     const [isGameOver, setIsGameOver] = useState(false);
     const [currentGuess, setCurrentGuess] = useState("");
-    const [guesses, setGuesses] = useState(Array(6).fill(null));
+    const [guesses, setGuesses] = useState(Array(WORD_LENGTH + 1).fill(null));
 
     useEffect(() => {
         const handleType = (e) => {
